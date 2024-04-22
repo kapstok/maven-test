@@ -1,18 +1,21 @@
 package com.nhlstenden.jallersma.maventemplate;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.spi.LoggerContextFactory;
+import com.google.inject.Inject;
 
 public class MyMath {
-    Logger logger = LogManager.getLogger(MyMath.class);
+    private final User user;
+
+    @Inject
+    public MyMath(User user) {
+        this.user = user;
+    }
+
     public int power(int n) {
-        if (n < 0)
-        {
+        user.log("power calculation");
+        if (n < 0) {
             return 0;
-        } else if (n > 30)
-        {
-            logger.debug("n > 30. Will result in value beyond max size on int");
+        } else if (n > 30) {
+            System.out.println("n > 30. Will result in value beyond max size on int");
             return Integer.MAX_VALUE;
         }
         return 1 << n;
