@@ -41,12 +41,16 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn package
+    - name: Only publish selected files
+      run: |
+        mkdir www
+        cp -v target/testing-1.0-SNAPSHOT-jar-with-dependencies.jar www
     - name: Setup Pages
       uses: actions/configure-pages@v5
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
       with:
-        path: 'target'
+        path: 'www'
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
